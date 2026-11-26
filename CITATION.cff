@@ -19,17 +19,9 @@ keywords:
   - powder-diffraction
 abstract: "CrystaSee is an interactive desktop application for crystal structure visualization and analysis, including CIF structure rendering, powder diffraction simulation, molecular stacking and crystal-structure disorder handling."
 
-# ---------------------------------------------------------------------------
-# DOI 回填区（发布 GitHub Release 并由 Zenodo 归档后填写）
-#
-# 本仓库采用「概念 DOI」作为主引用标识：它指向 CrystaSee 的所有版本，
-# 后续发布新版本时无需更改引用。Zenodo 会同时生成一个版本 DOI，
-# 版本 DOI 请记在 docs/DOI-WORKFLOW.md，用于需要精确复现的场景。
-#
-# 步骤：把下面 identifiers 段的注释取消，将 <CONCEPT_DOI> 换成
-#       形如 10.5281/zenodo.1234567 的真实概念 DOI，然后提交推送。
-# ---------------------------------------------------------------------------
-# identifiers:
-#   - type: doi
-#     value: "<CONCEPT_DOI>"
-#     description: "Concept DOI - resolves to the latest version of CrystaSee"
+# 概念 DOI：指向 CrystaSee 的所有版本，后续发布新版本时无需更改引用。
+# 版本 DOI（V1.13）：10.5281/zenodo.24564478，记在 docs/DOI-WORKFLOW.md。
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24564477"
+    description: "Concept DOI - resolves to the latest version of CrystaSee"

@@ -2,11 +2,7 @@
 
 > **仓库**：<https://github.com/EricYeah-CN/CrystaSee> · 标签 `v1.13` 已推送。
 >
-> **引用**：本软件采用 Zenodo 概念 DOI。DOI 将在 Release 归档后生成，回填流程见 [`docs/DOI-WORKFLOW.md`](docs/DOI-WORKFLOW.md)。
-
-<!-- DOI 徽章占位：拿到概念 DOI 后替换为下面这一行（去掉注释）
-[![DOI](https://zenodo.org/badge/DOI/<CONCEPT_DOI>.svg)](https://doi.org/<CONCEPT_DOI>)
--->
+> **DOI**：[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24564477.svg)](https://doi.org/10.5281/zenodo.24564477) — 概念 DOI，指向所有版本的最新页。版本 DOI 与流程见 [`docs/DOI-WORKFLOW.md`](docs/DOI-WORKFLOW.md)。
 
 ## 1. 这是什么
 

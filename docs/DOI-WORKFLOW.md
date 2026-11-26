@@ -81,24 +81,30 @@ git push origin main
 
 **不要**重新发 Release 或新建标签——回填只是文档更新，不需要新的 DOI。
 
-## 4. 记录区（拿到 DOI 后填写）
+## 4. 记录区（已回填 2026-11-26）
 
-- 概念 DOI：`<待回填>`
-- V1.13 版本 DOI：`<待回填>`
-- Zenodo 记录 URL：`<待回填>`
+- **概念 DOI**：`10.5281/zenodo.24564477`（父记录 24564477，指向所有版本的最新页）
+- **V1.13 版本 DOI**：`10.5281/zenodo.24564478`（记录 24564478，标题中带 `(Version v1.13)`）
+- **Zenodo 记录 URL**：<https://zenodo.org/records/24564478>
+- 归档文件：`EricYeah-CN/CrystaSee-v1.13.zip`（469.7 kB）
 
-回填后建议在此处写一句引用示例，例如：
+DOI 来源：版本 DOI 由 Zenodo “Cite as” 给出（用户提供的引用文本），概念 DOI 从记录导出 JSON 的 `parent.pids.doi` 取得并验证可转发到最新版。
+
+引用示例（概念 DOI，本地维护）：
 
 ```bibtex
 @software{crystasee,
   title = {CrystaSee: Interactive Crystal Structure Visualization and Analysis},
   author = {Ye, Yang},
-  version = {V1.13},
   year = {2026},
-  doi = {<CONCEPT_DOI>},
+  doi = {10.5281/zenodo.24564477},
   url = {https://github.com/EricYeah-CN/CrystaSee}
 }
 ```
+
+Zenodo 官方 “Cite as” 给出的版本化引用（用于精确复现 V1.13）：
+
+> Ye, Y. (2026). CrystaSee: Interactive Crystal Structure Visualization and Analysis (Version v1.13) [Computer software]. Zenodo. <https://doi.org/10.5281/zenodo.24564478>
 
 ## 5. 排查：Release 已发布但 Zenodo 迟迟不出现 DOI
 

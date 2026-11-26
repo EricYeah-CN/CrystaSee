@@ -17,9 +17,11 @@ This is a snapshot of the **front-end sources and build artifacts shipped with C
 
 ## Citation
 
-CrystaSee uses a Zenodo **concept DOI** as its primary citation identifier; it always resolves to the latest version. The DOI will be generated once this release is archived by Zenodo, and will then be added to `CITATION.cff` and the README of this repository. See [`DOI-WORKFLOW.md`](DOI-WORKFLOW.md) for the workflow (in Chinese).
+CrystaSee uses a Zenodo **concept DOI** as its primary citation identifier; it always resolves to the latest version:
 
-For exact reproducibility of V1.13 behavior, please also state the version `V1.13` and the version DOI.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24564477.svg)](https://doi.org/10.5281/zenodo.24564477) — `10.5281/zenodo.24564477`
+
+For exact reproducibility of V1.13 behavior, please also cite the version DOI: `10.5281/zenodo.24564478`. See [`DOI-WORKFLOW.md`](DOI-WORKFLOW.md) for details (in Chinese).
 
 ## Known limitations
 
@@ -47,9 +49,9 @@ For exact reproducibility of V1.13 behavior, please also state the version `V1.1
 
 ### 引用
 
-本软件采用 Zenodo **概念 DOI** 作为主引用标识（会指向所有版本的最新页）。DOI 将在本次 Release 被 Zenodo 归档后生成并回填到本仓库的 `CITATION.cff` 与 README。流程见 [`DOI-WORKFLOW.md`](DOI-WORKFLOW.md)。
+本软件采用 Zenodo **概念 DOI** 作为主引用标识（会指向所有版本的最新页）：`10.5281/zenodo.24564477`。
 
-需要精确复现 V1.13 行为时，请同时注明版本 `V1.13` 与版本 DOI。
+需要精确复现 V1.13 行为时，请同时注明版本 `V1.13` 与版本 DOI `10.5281/zenodo.24564478`。流程见 [`DOI-WORKFLOW.md`](DOI-WORKFLOW.md)。
 
 ### 已知边界
 
