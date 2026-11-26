@@ -31,10 +31,14 @@ Zenodo 在归档一次 GitHub Release 时，会**同时**生成两个 DOI，无�
    - Title 建议：`CrystaSee V1.13 (source snapshot)`
    - Description 可直接粘贴 [`RELEASE-NOTES-V1.13.md`](RELEASE-NOTES-V1.13.md) 的内容
    - 点击 **Publish release**
-5. Zenodo 后端通过 webhook 自动归档该 Release（含 `CITATION.cff` 元数据），几分钟后在 Zenodo 账户的 Records 里出现新记录。
-6. 打开该记录，页面右侧 “Cite as” 区域会同时给出两个 DOI：
-   - 标有 “Concept DOI” 的那条 → 抄下来备用
-   - 标有 “Version DOI” 的那条 → 记到本文第 4 节
+5. Zenodo 后端通过 webhook 自动归档该 Release（含 `CITATION.cff` 元数据），处理需要几分钟，取决于文件大小与 Zenodo 负载。
+6. **看记录的位置**（两个入口，任选其一）：
+   - **入口 A（最直观，能看到处理状态）**：Zenodo 右上角**头像菜单 → GitHub** → 点选仓库 `EricYeah-CN/CrystaSee` → 列表里出现该 Release 及其状态；处理完成后点该行的 **record DOI** 链接进入记录页。若失败，展开该 Release → **Errors** 查看原因。
+   - **入口 B（通用）**：右上角**头像菜单 → My dashboard → My uploads**，新记录会出现在这里（含草稿与已发布记录）。
+7. 进入记录页后，页面上会同时出现两个 DOI（位置随 Zenodo 界面版本略有不同，通常在顶部的 DOI 徽章 / “Cite as” 面板与 “Versions” 区域）：
+   - **Concept DOI**（概念 DOI，指向所有版本的最新页）→ 抄下来，这是本仓库的主引用标识
+   - **Version DOI**（版本 DOI，对应 V1.13 这一次归档）→ 记到本文第 4 节
+   - 也可在记录页确认归档状态：**External resources → Archived in**（Software Heritage）。
 
 > Windows 本机实测：`zenodo.org` 网页可访问，`api.zenodo.org` 经代理返回 502。网页路径可用；Zenodo 归档由它自己的后端完成，不依赖本机 API。
 
