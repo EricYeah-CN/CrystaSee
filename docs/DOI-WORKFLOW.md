@@ -100,7 +100,17 @@ git push origin main
 }
 ```
 
-## 5. 常见坑
+## 5. 排查：Release 已发布但 Zenodo 迟迟不出现 DOI
+
+实测案例（2026-11-26）：Release 22:48 发布，25 分钟后 Zenodo 全站搜索 `CrystaSee` 仍无任何记录。这种“搜索完全查不到”的情况不是处理慢，而是**归档没有被触发**。按下列顺序排查：
+
+1. **仓库是否真的启用了**（最常见）：Zenodo 头像菜单 → **GitHub** → 页面上找 `EricYeah-CN/CrystaSee`，确认开关已 toggle 为启用；没有就先启用。注意“Linked accounts 里连接 GitHub 账号”和“GitHub 页面里启用具体仓库”是**两个独立步骤**，只做前者不会触发归档。
+2. **启用与发布的先后顺序**：Zenodo 只对**启用之后新发布**的 Release 做归档，不回溯已有 Release。如果你是先 publish 了 Release 才去启用仓库，那个 Release 永远不会出现在 Zenodo。解决办法：在 GitHub 上把该 Release 删除后重新 publish（同一标签 `v1.13` 即可），或在 Zenodo 的 GitHub 页面里点该仓库 → **Create release** 重新走一遍发布流程。
+3. **看失败原因**：Zenodo 头像菜单 → GitHub → 选仓库 → 展开对应 Release → **Errors**，会给出具体错误（如 `CITATION.cff` 元数据不合法）。可用 cff-converter 校验 `CITATION.cff`。
+4. **确认归档状态**：进入 Zenodo 记录页 → **External resources → Archived in**（Software Heritage）。
+5. 真正的处理延迟通常发生在记录已经生成、但 Software Heritage 归档尚未完成时，而不是连记录都没有。
+
+## 6. 常见坑
 
 - **CITATION.cff 与 .zenodo.json 二选一**：Zenodo 联动时若存在 `CITATION.cff`，`.zenodo.json` 会被忽略。本仓库只用前者。
 - **Release 发布即冻结**：Zenodo 归档后该版本的文件不能再改；要改只能新建 Release，会得到新的版本 DOI，但概念 DOI 不变。
