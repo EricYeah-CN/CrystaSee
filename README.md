@@ -1,6 +1,12 @@
 # CrystaSee V1.13（源码快照）
 
-> **当前状态**：本地准备完成，**尚未推送 GitHub**。网络恢复后按 [`PUSH_GUIDE.md`](PUSH_GUIDE.md) 执行。
+> **仓库**：<https://github.com/EricYeah-CN/CrystaSee> · 标签 `v1.13` 已推送。
+>
+> **引用**：本软件采用 Zenodo 概念 DOI。DOI 将在 Release 归档后生成，回填流程见 [`docs/DOI-WORKFLOW.md`](docs/DOI-WORKFLOW.md)。
+
+<!-- DOI 徽章占位：拿到概念 DOI 后替换为下面这一行（去掉注释）
+[![DOI](https://zenodo.org/badge/DOI/<CONCEPT_DOI>.svg)](https://doi.org/<CONCEPT_DOI>)
+-->
 
 ## 1. 这是什么
 
@@ -31,6 +37,7 @@ V1.13 归档是 PyInstaller onedir 打包产物，**不包含**以下源码 / �
 
 ```
 .
+├── CITATION.cff                    # GitHub 引用元数据（概念 DOI 回填位）
 ├── LICENSE                         # 项目 MIT 许可（自研代码）
 ├── THIRD_PARTY_NOTICES.md          # 第三方组件许可清单
 ├── version.txt                     # V1.13
@@ -48,6 +55,8 @@ V1.13 归档是 PyInstaller onedir 打包产物，**不包含**以下源码 / �
 │       └── element_data.json       # 元素基础数据
 ├── docs/
 │   ├── V1.13-SOURCE-PROVENANCE.md  # 来源、哈希、缺失清单
+│   ├── DOI-WORKFLOW.md             # 概念 DOI 获取与回填流程
+│   ├── RELEASE-NOTES-V1.13.md      # GitHub Release 正文
 │   ├── FONT-SETUP.md               # 字体获取与校验（字体不在仓库内）
 │   └── HarmonyOS-Sans-Fonts-LICENSE.txt
 ├── tools/
@@ -65,6 +74,7 @@ V1.13 归档是 PyInstaller onedir 打包产物，**不包含**以下源码 / �
 
 ## 5. 后续建议
 
-1. 先用本快照建立 Git 历史并打 `v1.13` 标签，保住版本起点。
-2. 另开 `main` 分支整理当前 V1.17 可构建源码，作为后续持续开源的主线。
-3. 若需字节级重建 V1.13，请从历史备份补齐 Python 入口与构建输入；不要从 V1.17 倒推冒充 V1.13。
+1. **发布 GitHub Release**：在 Releases 页用已有 `v1.13` 标签创建 Release，正文可用 [`docs/RELEASE-NOTES-V1.13.md`](docs/RELEASE-NOTES-V1.13.md)。这一步会触发 Zenodo 生成 DOI。
+2. **回填概念 DOI**：拿到 DOI 后按 [`docs/DOI-WORKFLOW.md`](docs/DOI-WORKFLOW.md) 更新 `CITATION.cff` 与 README 徽章。
+3. 另开分支整理当前 V1.17 可构建源码，作为后续持续开源的主线；不要从 V1.17 倒推冒充 V1.13。
+4. 若需字节级重建 V1.13，请从历史备份补齐 Python 入口与构建输入。
