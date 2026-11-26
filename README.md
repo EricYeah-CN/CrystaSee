@@ -6,7 +6,9 @@
 
 本目录是从 `CrystaSee/dist/releases/CrystaSee-V1.13/` 归档中提取的 **V1.13 运行态源码快照**，包含该版本实际随包的前端源码 / 构建产物、元素数据、项目许可证与第三方声明。
 
-所有纳入文件均逐字节复制自 V1.13 归档，SHA-256 见 [`docs/V1.13-SOURCE-PROVENANCE.md`](docs/V1.13-SOURCE-PROVENANCE.md)。
+所有纳入文件均逐字节复制自 V1.13 归档，原文件 SHA-256 见 [`docs/V1.13-SOURCE-PROVENANCE.md`](docs/V1.13-SOURCE-PROVENANCE.md)。
+
+> 行尾说明：归档中的 `.js` / `.html` / `.md` 等文本文件为 CRLF，入库时按 `.gitattributes` 统一为 LF。因此 Git blob 的 SHA-256 与原文件不同，但文本内容一致。`element_data.json` 与 `version.txt` 原本即为 LF，哈希一致。
 
 ## 2. 完整性声明（推送前必读）
 
