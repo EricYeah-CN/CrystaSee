@@ -90,7 +90,15 @@ git push origin main
 
 DOI 来源：版本 DOI 由 Zenodo “Cite as” 给出（用户提供的引用文本），概念 DOI 从记录导出 JSON 的 `parent.pids.doi` 取得并验证可转发到最新版。
 
-引用示例（概念 DOI，本地维护）：
+### 概念 DOI 引用（主用，APA 格式）
+
+```
+Ye, Y. (2026). CrystaSee: Interactive Crystal Structure Visualization and Analysis [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24564477
+```
+
+**注意**：Zenodo 界面**不直接给出概念 DOI 的 “Cite as”**（打开概念 DOI 会重定向到最新版记录页，其 Cite as 是带版本的）。上面的格式是按官方版本引用，去掉 `(Version v1.13)`、DOI 换成概念 DOI 构造的，属通行做法。IEEE/Vancouver/Chicago 等其他格式同理。
+
+BibTeX（概念 DOI，本地维护）：
 
 ```bibtex
 @software{crystasee,
