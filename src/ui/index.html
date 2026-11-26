@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrystaSee晶见 | 晶体结构可视化与分析工作台 V1.13</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ 顶部菜单栏 ============ -->
+<nav class="menu-bar pywebview-drag-region">
+  <div class="mb-brand pywebview-drag-region">
+    <img class="mb-logo" src="../resources/logo-mark-128.png" alt="CrystaSee">
+    <span class="mb-en">CrystaSee</span><span class="mb-cn" data-cs-no-i18n>晶见</span>
+    <span class="mb-pipe">|</span>
+    <span class="mb-desc">晶体结构可视化与分析工作台</span>
+    <span class="ver-pill">V1.13</span>
+  </div>
+  <div class="mb-spacer pywebview-drag-region"></div>
+
+  <ul class="menu" id="menu">
+    <li class="menu-item" data-menu="file">
+      <span class="mi-label">文件 <i class="caret">▾</i></span>
+      <div class="menu-drop">
+        <div class="mi" data-cmd="open"><span class="mi-ico">▤</span>打开结构文件…<span class="mi-acc">Ctrl+O</span></div>
+        <div class="mi" data-cmd="recent"><span class="mi-ico">🕘</span>最近文件</div>
+        <div class="mi-sep"></div>
+        <div class="mi" data-cmd="save"><span class="mi-ico">⤓</span>保存图片</div>
+        <div class="mi" data-cmd="saveas"><span class="mi-ico">💾</span>另存为图片…</div>
+        <div class="mi-sep"></div>
+        <div class="mi" data-cmd="exit"><span class="mi-ico">⏻</span>退出</div>
+      </div>
+    </li>
+    <li class="menu-item" data-menu="display">
+      <span class="mi-label">显示 <i class="caret">▾</i></span>
+      <div class="menu-drop">
+        <div class="mi mi-title">分子模型</div>
+        <div class="mi" data-cmd="style" data-value="line"><span class="mi-ico">∕</span>Line 线状</div>
+        <div class="mi" data-cmd="style" data-value="stick"><span class="mi-ico">│</span>Stick 棍状</div>
+        <div class="mi" data-cmd="style" data-value="ballstick"><span class="mi-ico">◍</span>Ball &amp; Stick 球棍</div>
+        <div class="mi" data-cmd="style" data-value="cpk"><span class="mi-ico">●</span>CPK 球堆积</div>
+        <div class="mi" data-cmd="style" data-value="wire"><span class="mi-ico">▦</span>Wireframe 线框</div>
+        <div class="mi-sep"></div>
+        <div class="mi mi-title">显示范围</div>
+        <div class="mi" data-cmd="range" data-value="interior"><span class="mi-ico">▭</span>仅晶胞内部（含边界）</div>
+        <div class="mi" data-cmd="range" data-value="complete"><span class="mi-ico">▢</span>补全截断分子</div>
+        <div class="mi" data-cmd="range" data-value="asu"><span class="mi-ico">◹</span>仅不对称单元</div>
+        <div class="mi" data-cmd="range" data-value="packing"><span class="mi-ico">⊞</span>堆积模式（单晶胞 · 补全分子）</div>
+        <div class="mi-sep"></div>
+        <div class="mi mi-title">晶胞框</div>
+        <div class="mi" data-cmd="frame" data-value="none"><span class="mi-ico">∅</span>不显示</div>
+        <div class="mi" data-cmd="frame" data-value="line"><span class="mi-ico">▱</span>线状（标注非粗体）</div>
+        <div class="mi" data-cmd="frame" data-value="rod"><span class="mi-ico">▰</span>棒状（标注粗体）</div>
+        <div class="mi-sep"></div>
+        <div class="mi mi-title">相互作用</div>
+        <div class="mi" data-toggle="chk-hbond"><span class="mi-ico">⬡</span>氢键显示<span class="mi-acc" id="mi-hbond-state">✓</span></div>
+        <div class="mi" data-toggle="chk-vdw"><span class="mi-ico">⬡</span>范德华接触显示<span class="mi-acc" id="mi-vdw-state"></span></div>
+        <div class="mi-sep"></div>
+        <div class="mi mi-title">ORTEP（各向异性位移参数椭球）</div>
+        <div class="mi" data-cmd="ortep"><span class="mi-ico">⬭</span>ORTEP 椭球展示</div>
+        <div class="mi-sep"></div>
+        <div class="mi" data-toggle="labels"><span class="mi-ico">◌</span>显示 o / a / b / c 标注</div>
+        <div class="mi" data-toggle="chk-atom-labels"><span class="mi-ico">⌗</span>显示原子标签<span class="mi-acc" id="mi-atomlabels-state"></span></div>
+        <div class="mi-sep"></div>
+        <div class="mi" data-cmd="panel-toggle"><span class="mi-ico">▤</span>参数面板（显示 / 隐藏）</div>
+      </div>
+    </li>
+    <li class="menu-item" data-menu="calc">
+      <span class="mi-label">计算 <i class="caret">▾</i></span>
+      <div class="menu-drop">
+        <div class="mi" data-cmd="struct-info"><span class="mi-ico">📋</span>结构信息</div>
+        <div class="mi" data-cmd="interaction-analysis"><span class="mi-ico">⬡</span>相互作用分析</div>
+        <div class="mi" data-cmd="freevol"><span class="mi-ico">◔</span>自由体积占比</div>
+        <div class="mi-sep"></div>
+        <div class="mi mi-title">晶面与晶习</div>
+        <div class="mi" data-cmd="bfdh"><span class="mi-ico">◆</span>BFDH 模型</div>
+        <div class="mi" data-cmd="cleavage"><span class="mi-ico">▤</span>晶面解理（(hkl) 分子堆积）</div>
+        <div class="mi-sep"></div>
+        <div class="mi mi-title">配位多面体</div>
+        <div class="mi" data-cmd="polyhedron"><span class="mi-ico">◈</span>配位多面体（Coordination Polyhedra）</div>
+      </div>
+    </li>
+    <li class="menu-item" data-menu="pxrd">
+      <span class="mi-label">PXRD <i class="caret">▾</i></span>
+      <div class="menu-drop">
+        <div class="mi" data-cmd="pxrd-sim"><span class="mi-ico">∿</span>PXRD 模拟</div>
+        <div class="mi" data-cmd="pxrd-multi"><span class="mi-ico">∿</span>多 PXRD 对比</div>
+        <div class="mi" data-cmd="neutron"><span class="mi-ico">◉</span>中子衍射模拟</div>
+        <div class="mi" data-cmd="pxrd-convert"><span class="mi-ico">⇪</span>PXRD 格式转换</div>
+      </div>
+    </li>
+    <li class="menu-item" data-menu="links">
+      <span class="mi-label">外部链接 <i class="caret">▾</i></span>
+      <div class="menu-drop">
+        <div class="mi" data-link="https://www.ccdc.cam.ac.uk/deposit/"><span class="mi-ico">🔗</span>CCDC 沉积号申请</div>
+        <div class="mi" data-link="https://checkcif.iucr.org/"><span class="mi-ico">🔗</span>CheckCif</div>
+        <div class="mi" data-link="http://www.crystallography.net/cod/"><span class="mi-ico">🔗</span>COD 数据库</div>
+      </div>
+    </li>
+    <li class="menu-item" data-menu="help">
+      <span class="mi-label">帮助 <i class="caret">▾</i></span>
+      <div class="menu-drop">
+        <div class="mi mi-title">说明</div>
+        <div class="mi" data-modal="manual"><span class="mi-ico">📖</span>用户操作手册</div>
+        <div class="mi" data-modal="about"><span class="mi-ico">ⓘ</span>关于晶见</div>
+        <div class="mi" data-cmd="version"><span class="mi-ico">ⓥ</span>版本信息</div>
+        <div class="mi" data-modal="license"><span class="mi-ico">⚖</span>使用许可</div>
+      </div>
+    </li>
+    <li class="menu-item" id="mi-feedback" data-menu="feedback">
+      <span class="mi-label">问题反馈</span>
+    </li>
+  </ul>
+
+  <div class="mb-lang" id="mb-lang" data-cs-no-i18n>
+    <button class="mb-lang-cur" id="mb-lang-cur" type="button"
+            aria-haspopup="listbox" aria-expanded="false" title="界面语言 / UI language">
+      <span class="mb-lang-text" id="mb-lang-text">简体中文</span>
+      <svg class="mb-lang-caret" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.4 6 6.4 11 1.4"/></svg>
+    </button>
+    <div class="mb-lang-menu" id="mb-lang-menu" role="listbox" aria-label="界面语言">
+      <div class="mb-lang-opt active" data-cs-lang-opt="zh" role="option" aria-selected="true">简体中文</div>
+      <div class="mb-lang-opt" data-cs-lang-opt="en" role="option" aria-selected="false">English</div>
+    </div>
+  </div>
+
+  <div class="mb-actions">
+    <span class="mb-sep"></span>
+    <button class="win-ctrl" id="win-min" title="最小化">−</button>
+    <button class="win-ctrl" id="win-max" title="最大化窗口">□</button>
+    <button class="win-ctrl close" id="win-close" title="关闭">×</button>
+  </div>
+</nav>
+
+<!-- ============ 工作区：可吸附参数面板 + 可视化 ============ -->
+<div class="workspace" id="workspace">
+  <aside class="dock-panel dock-left" id="paramPanel">
+    <div class="pp-grip" id="ppGrip">
+      <span class="grip-dots">⋮⋮</span>
+      <b>参数选择</b>
+      <div class="pp-grip-actions">
+        <button class="pp-mini" id="ppDockBtn" title="停靠位置">停靠▾</button>
+        <button class="pp-mini" id="ppCollapse" title="收起面板">—</button>
+      </div>
+      <div class="pp-dock-menu" id="ppDockMenu">
+        <div class="dm" data-dock="left">停靠到左侧</div>
+        <div class="dm" data-dock="right">停靠到右侧</div>
+        <div class="dm" data-dock="bottom">停靠到下方</div>
+        <div class="dm" data-dock="float">浮动窗口</div>
+      </div>
+    </div>
+    <div class="pp-body" id="pp-body">
+
+      <div class="pp-group">
+        <div class="pp-title">结构与文件</div>
+        <div class="cs-select" data-cmd="struct">
+          <div class="cs-head"><span>案例演示</span><b class="cs-val">NaCl 盐</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt selected" data-value="nacl">NaCl 盐</div>
+            <div class="cs-opt" data-value="quartz">α-石英</div>
+            <div class="cs-opt" data-value="diamond">金刚石</div>
+            <div class="cs-opt" data-value="NACL">NaCl (halite, COD)</div>
+            <div class="cs-opt" data-value="ADBA1">ADBA Form I</div>
+            <div class="cs-opt" data-value="ADBA2">ADBA Form II</div>
+            <div class="cs-opt" data-value="ADBA3">ADBA Form III</div>
+            <div class="cs-opt" data-value="R20210904A">r20210904a</div>
+            <div class="cs-opt" data-value="R20231217B">R20231217b</div>
+            <div class="cs-opt" data-value="COF5">COF-5 (COF)</div>
+            <div class="cs-opt" data-value="CUBTC">Cu-BTC (MOF)</div>
+          </div>
+        </div>
+        <button class="pp-btn full" id="pp-open">载入本地结构文件…</button>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">视角与模型</div>
+        <div class="cs-select" data-cmd="proj">
+          <div class="cs-head"><span>投影方式</span><b class="cs-val">透视（近大远小）</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt selected" data-value="persp">透视投影 · 近大远小（有景深）</div>
+            <div class="cs-opt" data-value="ortho">正交投影 · 无景深（远近等大）</div>
+          </div>
+        </div>
+        <div class="cs-select" data-cmd="view">
+          <div class="cs-head"><span>固定视角</span><b class="cs-val">自由视角</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt" data-value="a">a · a 轴朝里</div>
+            <div class="cs-opt" data-value="b">b · b 轴朝里</div>
+            <div class="cs-opt" data-value="c">c · c 轴朝里</div>
+            <div class="cs-opt" data-value="a*">a* · a 轴朝外</div>
+            <div class="cs-opt" data-value="b*">b* · b 轴朝外</div>
+            <div class="cs-opt" data-value="c*">c* · c 轴朝外</div>
+          </div>
+        </div>
+        <div class="cs-select" data-cmd="style">
+          <div class="cs-head"><span>渲染风格</span><b class="cs-val">Ball &amp; Stick 球棍</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt" data-value="line">Line 线状</div>
+            <div class="cs-opt" data-value="stick">Stick 棍状</div>
+            <div class="cs-opt selected" data-value="ballstick">Ball &amp; Stick 球棍</div>
+            <div class="cs-opt" data-value="cpk">CPK 球堆积</div>
+            <div class="cs-opt" data-value="wire">Wireframe 线框</div>
+          </div>
+        </div>
+        <button class="pp-btn full" id="pp-fit">复位视角（重新取景）</button>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">风格参数 <span class="pp-note">数值实时显示</span></div>
+        <div class="slider" data-style-group="line"><label>线宽 (Å)</label><input type="range" data-slider="p-line-w" data-dec="3" min="0.008" max="0.06" step="0.002" value="0.028"><output>0.028</output></div>
+        <div class="slider" data-style-group="stick"><label>棍半径 (Å)</label><input type="range" data-slider="p-stick-r" data-dec="2" min="0.05" max="0.30" step="0.01" value="0.16"><output>0.16</output></div>
+        <div class="slider" data-style-group="ballstick"><label>球半径比例</label><input type="range" data-slider="p-bs-ball" data-dec="2" min="0.12" max="0.60" step="0.02" value="0.30"><output>0.30</output></div>
+        <div class="slider" data-style-group="ballstick"><label>键半径 (Å)</label><input type="range" data-slider="p-bs-bond" data-dec="2" min="0.03" max="0.22" step="0.01" value="0.09"><output>0.09</output></div>
+        <div class="slider" data-style-group="cpk"><label>球半径（×范德华）</label><input type="range" data-slider="p-cpk-s" data-dec="1" min="0.5" max="1.5" step="0.1" value="1.0"><output>1.0</output></div>
+        <div class="slider" data-style-group="wire"><label>线半径 (Å)</label><input type="range" data-slider="p-wire-l" data-dec="3" min="0.008" max="0.05" step="0.002" value="0.020"><output>0.020</output></div>
+        <div class="slider" data-style-group="wire"><label>顶点球比例</label><input type="range" data-slider="p-wire-a" data-dec="2" min="0.05" max="0.30" step="0.01" value="0.12"><output>0.12</output></div>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">显示范围与晶胞</div>
+        <div class="cs-select" data-cmd="range">
+          <div class="cs-head"><span>显示范围</span><b class="cs-val">仅晶胞内部（含边界）</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt selected" data-value="interior">仅晶胞内部（含边界）</div>
+            <div class="cs-opt" data-value="complete">补全截断分子</div>
+            <div class="cs-opt" data-value="asu">仅不对称单元（CIF 位点表）</div>
+            <div class="cs-opt" data-value="packing">堆积模式（单晶胞 · 补全分子）</div>
+          </div>
+        </div>
+        <label class="pp-check"><input type="checkbox" data-check="force-complete"> 强制补全（网络晶体也补）</label>
+        <div class="num-row"><span>超胞</span> a <input type="number" data-number="sc-a" min="1" max="5" value="1"> b <input type="number" data-number="sc-b" min="1" max="5" value="1"> c <input type="number" data-number="sc-c" min="1" max="5" value="1"></div>
+        <div class="cs-select" data-cmd="frame">
+          <div class="cs-head"><span>晶胞框</span><b class="cs-val">线状</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt" data-value="none">不显示</div>
+            <div class="cs-opt selected" data-value="line">线状（标注非粗体）</div>
+            <div class="cs-opt" data-value="rod">棒状（标注粗体）</div>
+          </div>
+        </div>
+        <label class="pp-check"><input type="checkbox" data-check="chk-labels" checked> 显示 o / a / b / c 标注</label>
+        <label class="pp-check"><input type="checkbox" data-check="chk-atom-labels"> 显示原子标签</label>
+        <div class="range-tip" id="pp-range-tip">显示范围说明将在载入结构后更新。</div>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">光照</div>
+        <div class="slider"><label>方位角</label><input type="range" data-slider="pl-az" data-dec="0" data-unit="°" min="0" max="360" step="1" value="40"><output>40°</output></div>
+        <div class="slider"><label>仰角</label><input type="range" data-slider="pl-el" data-dec="0" data-unit="°" min="-80" max="80" step="1" value="45"><output>45°</output></div>
+        <div class="slider"><label>强度</label><input type="range" data-slider="pl-in" data-dec="0" data-unit="%" min="30" max="180" step="5" value="100"><output>100%</output></div>
+        <label class="pp-check"><input type="checkbox" data-check="pl-follow" checked> 光源跟随视角（头灯模式）</label>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">背景 · 材质 · 配色</div>
+        <div class="cs-select" data-cmd="bg">
+          <div class="cs-head"><span>背景</span><b class="cs-val">深空渐变</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt selected" data-value="deep">深空渐变</div>
+            <div class="cs-opt" data-value="void">纯黑</div>
+            <div class="cs-opt" data-value="graphite">石墨灰</div>
+            <div class="cs-opt" data-value="ocean">深海蓝</div>
+            <div class="cs-opt" data-value="purple">暗紫</div>
+            <div class="cs-opt" data-value="midnight">子夜</div>
+            <div class="cs-opt" data-value="paper">纯白（出版风）</div>
+          </div>
+        </div>
+        <div class="cs-select" data-cmd="mat">
+          <div class="cs-head"><span>材质质感</span><b class="cs-val">瓷器光泽</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt selected" data-value="gloss">瓷器光泽</div>
+            <div class="cs-opt" data-value="matte">哑光出版</div>
+            <div class="cs-opt" data-value="metal">金属</div>
+            <div class="cs-opt" data-value="plastic">塑料</div>
+          </div>
+        </div>
+        <div class="cs-select" data-cmd="scheme">
+          <div class="cs-head"><span>配色方案</span><b class="cs-val">高对比</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt" data-value="cpk">CPK 标准</div>
+            <div class="cs-opt selected" data-value="contrast">高对比（默认）</div>
+            <div class="cs-opt" data-value="family">元素分族 Grouped</div>
+            <div class="cs-opt" data-value="okabe">色盲友好 Okabe–Ito</div>
+          </div>
+        </div>
+        <div class="pp-btn-row">
+          <button class="pp-btn" id="pp-publish">一键出版风</button>
+          <button class="pp-btn" id="pp-showcase">酷炫默认</button>
+        </div>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">其他显示</div>
+        <label class="pp-check"><input type="checkbox" data-check="chk-ssao"> 环境遮蔽 SSAO</label>
+        <label class="pp-check"><input type="checkbox" data-check="chk-rotate"> 自动旋转</label>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">相互作用</div>
+        <label class="pp-check"><input type="checkbox" data-check="chk-hbond" checked> <span class="int-dot int-hbond"></span>氢键（虚线）</label>
+        <label class="pp-check"><input type="checkbox" data-check="chk-vdw"> <span class="int-dot int-vdw"></span>范德华相互作用（虚线）</label>
+      </div>
+
+      <div class="pp-group">
+        <div class="pp-title">图片导出</div>
+        <div class="cs-select" data-cmd="res">
+          <div class="cs-head"><span>分辨率</span><b class="cs-val">1920 × 1080</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt" data-value="1600x950">1600 × 950 · 当前视图参考</div>
+            <div class="cs-opt selected" data-value="1920x1080">1920 × 1080 · 全高清 16:9</div>
+            <div class="cs-opt" data-value="2560x1440">2560 × 1440 · 2K 16:9</div>
+            <div class="cs-opt" data-value="3840x2160">3840 × 2160 · 4K 16:9</div>
+            <div class="cs-opt" data-value="2400x2400">2400 × 2400 · 方形插图</div>
+            <div class="cs-opt" data-value="custom">自定义尺寸…</div>
+          </div>
+        </div>
+        <div class="custom-size" id="customSizeRow" style="display:none">
+          <span>自定义</span> 宽 <input type="number" id="exp-w" min="256" max="8192" value="3000"> px
+          高 <input type="number" id="exp-h" min="256" max="8192" value="2000"> px
+        </div>
+        <div class="cs-select" data-cmd="shotBg">
+          <div class="cs-head"><span>背景模式</span><b class="cs-val">保留当前背景</b><i>▾</i></div>
+          <div class="cs-list">
+            <div class="cs-opt selected" data-value="opaque">保留当前背景（所见即所得）</div>
+            <div class="cs-opt" data-value="transparent">透明背景（PNG Alpha 通道）</div>
+          </div>
+        </div>
+        <button class="pp-btn full primary" id="pp-export">导出 PNG 图片</button>
+      </div>
+
+    </div>
+    <div class="pp-resize" id="ppResize"></div>
+  </aside>
+
+  <section class="viewer-stage" id="viewerStage">
+    <div class="view-bar" id="viewBar">
+      <span class="vb-label">固定视角</span>
+      <button class="vb-btn" data-view="a" title="a 轴朝里">a 里</button>
+      <button class="vb-btn" data-view="b" title="b 轴朝里">b 里</button>
+      <button class="vb-btn" data-view="c" title="c 轴朝里">c 里</button>
+      <button class="vb-btn" data-view="a*" title="a 轴朝外">a 外</button>
+      <button class="vb-btn" data-view="b*" title="b 轴朝外">b 外</button>
+      <button class="vb-btn" data-view="c*" title="c 轴朝外">c 外</button>
+      <span class="vb-sep"></span>
+      <button class="vb-btn" data-proj="persp" title="透视投影（近大远小）">透视</button>
+      <button class="vb-btn" data-proj="ortho" title="正交投影（远近等大）">正交</button>
+      <span class="vb-sep"></span>
+      <button class="vb-btn" id="vb-fit" title="复位视角（重新取景）">复位视角</button>
+      <button class="vb-btn" id="vb-rotate" title="自动旋转">自动旋转</button>
+    </div>
+    <iframe id="viewer" src="viewer.html" title="三维结构视图"></iframe>
+    <div class="viewer-float"><span class="dot-ok"></span><span id="vf-structure">NaCl 盐</span></div>
+    <div class="viewer-tip">左键旋转 · 滚轮缩放 · 右键平移 · 拖入结构文件可直接载入</div>
+  </section>
+
+  <!-- 停靠放置区（拖动参数面板时显示） -->
+  <div class="dz dz-left" data-dock="left"><span>停靠左侧</span></div>
+  <div class="dz dz-right" data-dock="right"><span>停靠右侧</span></div>
+  <div class="dz dz-bottom" data-dock="bottom"><span>停靠下方</span></div>
+  <div class="dz dz-float" data-dock="float"><span>浮动窗口</span></div>
+
+  <!-- 折叠后重新唤出面板的浮标 -->
+  <button class="panel-recall" id="panelRecall">参数面板 ▤</button>
+</div>
+
+<!-- ============ 底部状态栏 ============ -->
+<footer class="status-bar">
+  <span id="status-left">就绪 · 当前结构：NaCl 盐</span>
+  <span class="status-mid">纯本地运行 · 无外部网络请求</span>
+  <span class="status-right">CrystaSee晶见 | 晶体结构可视化与分析工作台 V1.13</span>
+</footer>
+
+<!-- ============ 模态：工具窗 / 帮助 / 关于 ============ -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <b id="modalTitle">标题</b>
+      <button class="modal-close" id="modalClose">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<input type="file" id="hidden-file" accept=".cif,.mmcif,.mol,.mol2,.xyz,.pdb" style="display:none">
+<script src="xray_sf.js"></script>
+<script src="i18n.js"></script>
+<script src="snaprmsd.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

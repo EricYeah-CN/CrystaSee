@@ -1,0 +1,42 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ===== PyInstaller / build outputs =====
+build/
+dist/
+pyi-*/
+*.exe
+*.dll
+*.pyd
+*.spec.bak
+
+# ===== Node =====
+node_modules/
+
+# ===== Fonts: separately licensed, never commit TTF/OTF =====
+*.ttf
+*.otf
+src/ui/fonts/
+
+# ===== Local artifacts =====
+*.log
+*.zip
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.ico
+*.tmp
+_workspace/
+_notes/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+desktop.ini
