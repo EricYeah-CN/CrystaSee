@@ -1,4 +1,4 @@
-# CrystaSee V1.13 (source snapshot)
+# CrystaSee V1.13
 
 > Released: 2026-11-26
 

@@ -28,7 +28,7 @@ Zenodo 在归档一次 GitHub Release 时，会**同时**生成两个 DOI，无�
 3. （可选但推荐）同页关联 ORCID，让引用能归属到你的 ORCID 记录。
 4. 回到 GitHub 仓库 → **Releases → Create a new release**：
    - Tag 选已有的 `v1.13`
-   - Title 建议：`CrystaSee V1.13 (source snapshot)`
+   - Title 建议：`CrystaSee V1.13`（完整性边界在正文说明即可，标题保持干净）
    - Description 可直接粘贴 [`RELEASE-NOTES-V1.13.md`](RELEASE-NOTES-V1.13.md) 的内容
    - 点击 **Publish release**
 5. Zenodo 后端通过 webhook 自动归档该 Release（含 `CITATION.cff` 元数据），处理需要几分钟，取决于文件大小与 Zenodo 负载。
