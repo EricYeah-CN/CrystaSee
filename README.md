@@ -2,7 +2,7 @@
 
 > **仓库**：<https://github.com/EricYeah-CN/CrystaSee> · 标签 `v1.13` 已推送。
 >
-> **DOI**：[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24564477.svg)](https://doi.org/10.5281/zenodo.24564477) — 概念 DOI，指向所有版本的最新页。版本 DOI 与流程见 [`docs/DOI-WORKFLOW.md`](docs/DOI-WORKFLOW.md)。
+> **DOI**：[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24564477.svg)](https://doi.org/10.5281/zenodo.24564477) — 概念 DOI，指向所有版本的最新页。版本 DOI 与流程见 [`docs/DOI-WORKFLOW.md`](docs/DOI-WORKFLOW.md)；各引文格式见 [`docs/CITATION-FORMATS.md`](docs/CITATION-FORMATS.md)。
 
 ## 1. 这是什么
 
@@ -33,7 +33,9 @@ V1.13 归档是 PyInstaller onedir 打包产物，**不包含**以下源码 / �
 
 ```
 .
-├── CITATION.cff                    # GitHub 引用元数据（概念 DOI 回填位）
+├── CITATION.cff                    # GitHub 引用元数据（概念 DOI）
+├── CITATION.bib                    # BibTeX 条目（概念 DOI + 版本 DOI）
+├── CITATION.ris                    # RIS 条目（EndNote / Zotero）
 ├── LICENSE                         # 项目 MIT 许可（自研代码）
 ├── THIRD_PARTY_NOTICES.md          # 第三方组件许可清单
 ├── version.txt                     # V1.13
@@ -51,6 +53,7 @@ V1.13 归档是 PyInstaller onedir 打包产物，**不包含**以下源码 / �
 │       └── element_data.json       # 元素基础数据
 ├── docs/
 │   ├── V1.13-SOURCE-PROVENANCE.md  # 来源、哈希、缺失清单
+│   ├── CITATION-FORMATS.md         # APA/MLA/Chicago/IEEE/Vancouver/GB-T/BibTeX/RIS
 │   ├── DOI-WORKFLOW.md             # 概念 DOI 获取与回填流程
 │   ├── RELEASE-NOTES-V1.13.md      # GitHub Release 正文
 │   ├── FONT-SETUP.md               # 字体获取与校验（字体不在仓库内）

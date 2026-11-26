@@ -92,6 +92,8 @@ DOI 来源：版本 DOI 由 Zenodo “Cite as” 给出（用户提供的引用�
 
 ### 概念 DOI 引用（主用，APA 格式）
 
+完整的多格式引文集（APA / MLA / Chicago / IEEE / Vancouver / GB/T 7714 / BibTeX / RIS）见 [`CITATION-FORMATS.md`](CITATION-FORMATS.md)，另附根目录 `CITATION.bib` 与 `CITATION.ris` 可直接导入文献管理器。
+
 ```
 Ye, Y. (2026). CrystaSee: Interactive Crystal Structure Visualization and Analysis [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24564477
 ```
